@@ -1,5 +1,7 @@
 import express from 'express';
 import cookieSession from 'cookie-session';
+import { currentUser } from './middlewares/current-user';
+import { newRouter } from './routes/new';
 
 const app = express();
 
@@ -12,5 +14,9 @@ app.use(
     secure: false,
   })
 );
+app.use(currentUser);
+
+//Routes
+app.use('/api', newRouter);
 
 export { app };
