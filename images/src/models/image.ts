@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 interface ImageAttrs {
   userId: string;
   url: string;
+  filename: string;
   description: string;
   createdAt: Date;
 }
@@ -10,6 +11,7 @@ interface ImageAttrs {
 interface ImageDoc extends mongoose.Document {
   userId: string;
   url: string;
+  filename: string;
   description: string;
   createdAt: Date;
 }
@@ -21,6 +23,10 @@ interface ImageModel extends mongoose.Model<ImageDoc> {
 const imageSchema = new mongoose.Schema(
   {
     url: {
+      type: String,
+      required: true,
+    },
+    filename: {
       type: String,
       required: true,
     },

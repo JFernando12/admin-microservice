@@ -2,11 +2,16 @@ import Aws from 'aws-sdk';
 import fs from 'fs';
 import path from 'path';
 
-export class S3 {
-  readonly bucketName = process.env.AWS_BUCKET_NAME!;
-  readonly region = process.env.AWS_BUCKET_REGION;
-  readonly accessKeyId = process.env.AWS_ACCESS_KEY;
-  readonly secretAccessKey = process.env.AWS_SECRET_KEY;
+class S3 {
+  // readonly bucketName = process.env.AWS_BUCKET_NAME!;
+  // readonly region = process.env.AWS_BUCKET_REGION;
+  // readonly accessKeyId = process.env.AWS_ACCESS_KEY;
+  // readonly secretAccessKey = process.env.AWS_SECRET_KEY;
+
+  readonly bucketName = 'tdg-microservices';
+  readonly region = 'us-east-1';
+  readonly accessKeyId = 'AKIA5ZFNACTQ5HX7MD66';
+  readonly secretAccessKey = '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';
 
   private s3 = new Aws.S3({
     region: this.region,
@@ -35,3 +40,7 @@ export class S3 {
     return result.Location;
   }
 }
+
+const s3 = new S3();
+
+export { s3 };
