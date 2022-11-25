@@ -19,7 +19,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: images-mongo
+  name: images-mongo-srv
 spec:
   selector:
     app: images-mongo

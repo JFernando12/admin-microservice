@@ -18,7 +18,7 @@ app.use(
 app.use(currentUser);
 
 // Routes
-app.use(indexRouter);
-app.use(newRouter);
+app.use('/api', indexRouter);
+app.use('/api', newRouter);
 
 export { app };

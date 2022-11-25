@@ -24,3 +24,11 @@ build:
         manual:
           - dest: .
             src: 'src/**/*.ts'
+    - image: jfernando12/tdg-images
+      context: images
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.ts'
