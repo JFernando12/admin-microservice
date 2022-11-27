@@ -15,6 +15,34 @@ spec:
       containers:
         - name: images
           image: jfernando12/tdg-images
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://images-mongo-srv:27017/images'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-access-key-secret
+                  key: AWS_ACCESS_KEY
+            - name: AWS_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: aws-bucket-name-secret
+                  key: AWS_BUCKET_NAME
+            - name: AWS_BUCKET_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: aws-bucket-region-secret
+                  key: AWS_BUCKET_REGION
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret-key-secret
+                  key: AWS_SECRET_KEY
 ---
 apiVersion: v1
 kind: Service

@@ -47,7 +47,7 @@ router.post(
         username: user.username,
         permission: user.permission,
       },
-      'asdf'
+      process.env.JWT_KEY!
     );
 
     req.session = { jwt: userJwt };

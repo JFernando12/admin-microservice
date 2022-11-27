@@ -8,4 +8,6 @@ export const requireAuth = (
   if (!req.currentUser) {
     throw new Error('Not authorized');
   }
+
+  next();
 };

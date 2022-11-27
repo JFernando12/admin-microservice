@@ -3,15 +3,15 @@ import fs from 'fs';
 import path from 'path';
 
 class S3 {
-  // readonly bucketName = process.env.AWS_BUCKET_NAME!;
-  // readonly region = process.env.AWS_BUCKET_REGION;
-  // readonly accessKeyId = process.env.AWS_ACCESS_KEY;
-  // readonly secretAccessKey = process.env.AWS_SECRET_KEY;
+  readonly bucketName = process.env.AWS_BUCKET_NAME!;
+  readonly region = process.env.AWS_BUCKET_REGION;
+  readonly accessKeyId = process.env.AWS_ACCESS_KEY;
+  readonly secretAccessKey = process.env.AWS_SECRET_KEY;
 
-  readonly bucketName = 'tdg-microservices';
-  readonly region = 'us-east-1';
-  readonly accessKeyId = 'AKIA5ZFNACTQ5HX7MD66';
-  readonly secretAccessKey = '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';
+  // readonly bucketName = 'tdg-microservices';
+  // readonly region = 'us-east-1';
+  // readonly accessKeyId = 'AKIA5ZFNACTQ5HX7MD66';
+  // readonly secretAccessKey = '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';
 
   private s3 = new Aws.S3({
     region: this.region,
