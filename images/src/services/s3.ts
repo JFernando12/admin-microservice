@@ -8,11 +8,6 @@ class S3 {
   readonly accessKeyId = process.env.AWS_ACCESS_KEY;
   readonly secretAccessKey = process.env.AWS_SECRET_KEY;
 
-  // readonly bucketName = 'tdg-microservices';
-  // readonly region = 'us-east-1';
-  // readonly accessKeyId = 'AKIA5ZFNACTQ5HX7MD66';
-  // readonly secretAccessKey = '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';
-
   private s3 = new Aws.S3({
     region: this.region,
     accessKeyId: this.accessKeyId,
