@@ -23,6 +23,26 @@ spec:
                   key: JWT_KEY
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-srv:27017/auths'
+            - name: ROOT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: root-id-secret
+                  key: ROOT_ID
+            - name: ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: root-username-secret
+                  key: ROOT_USERNAME
+            - name: ROOT_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: root-email-secret
+                  key: ROOT_EMAIL
+            - name: ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: root-password-secret
+                  key: ROOT_PASSWORD
 ---
 apiVersion: v1
 kind: Service

@@ -24,11 +24,22 @@ router.post(
   async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
 
+    const userRoot = {
+      username: process.env.ROOT_USERNAME,
+      email: process.env.ROOT_EMAIL,
+      password: process.env.ROOT_PASSWORD,
+      permission: PermissionTypes.root,
+    };
+
     const existUsername = await User.find({
       $or: [{ username }, { email }],
     });
 
-    if (existUsername.length > 0) {
+    if (
+      existUsername.length > 0 ||
+      userRoot.email === email ||
+      userRoot.username === username
+    ) {
       throw new BadRequestError('Username or email already exist');
     }
 

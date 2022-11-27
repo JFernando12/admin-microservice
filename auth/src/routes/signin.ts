@@ -3,6 +3,7 @@ import { body } from 'express-validator';
 import Jwt from 'jsonwebtoken';
 import { BadRequestError } from '../errors/bad-request-error';
 import { NotAuthorizedError } from '../errors/not-authorized-error';
+import { PermissionTypes } from '../events/types/permission-types';
 import { validateRequest } from '../middlewares/validate-request';
 import { Auth } from '../models/auth';
 import { User } from '../models/user';
@@ -22,7 +23,16 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
 
+    const userRoot = {
+      id: process.env.ROOT_ID,
+      username: process.env.ROOT_USERNAME,
+      email: process.env.ROOT_EMAIL,
+      password: process.env.ROOT_PASSWORD!,
+      permission: PermissionTypes.root,
+    };
+
     let user;
+    let passwordMatch;
     if (!email) {
       user = await User.findOne({ username });
     } else {
@@ -30,11 +40,16 @@ router.post(
     }
 
     if (!user) {
-      throw new BadRequestError('User not found');
+      if (email === userRoot.email || username === userRoot.username) {
+        user = userRoot;
+        passwordMatch = user.password === password;
+      } else {
+        throw new BadRequestError('User not found');
+      }
+    } else {
+      const auth = await Auth.findOne({ user });
+      passwordMatch = await Password.compare(auth!.password, password);
     }
-
-    const auth = await Auth.findOne({ user });
-    const passwordMatch = await Password.compare(auth!.password, password);
 
     if (!passwordMatch) {
       throw new NotAuthorizedError();

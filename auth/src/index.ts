@@ -9,6 +9,22 @@ if (!process.env.MONGO_URI) {
   throw new Error('MONGO_URI is required');
 }
 
+if (!process.env.ROOT_ID) {
+  throw new Error('ROOT_ID is required');
+}
+
+if (!process.env.ROOT_USERNAME) {
+  throw new Error('ROOT_USERNAME is required');
+}
+
+if (!process.env.ROOT_EMAIL) {
+  throw new Error('ROOT_EMAIL is required');
+}
+
+if (!process.env.ROOT_PASSWORD) {
+  throw new Error('ROOT_PASSWORD is required');
+}
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then((db) => console.log('DB connect:', db.connections[0].name))

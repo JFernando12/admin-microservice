@@ -14,7 +14,10 @@ router.get('/images', requireAuth, async (req: Request, res: Response) => {
       userId: req.currentUser.id,
     });
   }
-  if (permission === PermissionTypes.admin) {
+  if (
+    permission === PermissionTypes.admin ||
+    permission === PermissionTypes.root
+  ) {
     images = await Image.find();
   }
 
