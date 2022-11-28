@@ -2,6 +2,8 @@ import express from 'express';
 import cookieSession from 'cookie-session';
 import { currentUser } from './middlewares/current-user';
 import { newRouter } from './routes/new';
+import { indexRouter } from './routes';
+import { errorHandler } from './middlewares/error-handler';
 
 const app = express();
 
@@ -18,5 +20,9 @@ app.use(currentUser);
 
 //Routes
 app.use('/api', newRouter);
+app.use('/api', indexRouter);
+
+//Error Handler
+app.use(errorHandler);
 
 export { app };

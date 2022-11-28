@@ -16,9 +16,12 @@ class S3 {
 
   public async upload(file: Express.Multer.File) {
     let ContentType = 'image/jpeg';
+
     if (path.extname(file.path) === '.png') {
       ContentType = 'image/png';
     }
+
+    console.log(2);
 
     const fileStream = fs.createReadStream(file.path);
 

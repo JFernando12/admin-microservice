@@ -27,7 +27,7 @@ if (!process.env.ROOT_PASSWORD) {
 
 mongoose
   .connect(process.env.MONGO_URI)
-  .then((db) => console.log('DB connect:', db.connections[0].name))
+  .then((db) => console.log('DB connected:', db.connections[0].name))
   .catch((err) => console.error(err));
 
 app.listen(3000, () => {

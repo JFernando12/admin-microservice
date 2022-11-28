@@ -1,8 +1,9 @@
 import { Request, Response, Router } from 'express';
+import { requireAuth } from '../middlewares/require-auth';
 
 const router = Router();
 
-router.get('/products', (req: Request, res: Response) => {
+router.get('/products', requireAuth, (req: Request, res: Response) => {
   res.send();
 });
 

@@ -1,6 +1,8 @@
 import { Request, Response, Router } from 'express';
 import 'express-async-errors';
-import { body } from 'express-validator';
+import { body, ValidationError } from 'express-validator';
+import { BadRequestError } from '../errors/bad-request-error';
+import { RequestValidatorError } from '../errors/request-validator-error';
 import { requireAuth } from '../middlewares/require-auth';
 import { validateRequest } from '../middlewares/validate-request';
 import { Image } from '../models/image';
@@ -19,7 +21,11 @@ router.post(
     const file = req.file;
     const { description } = req.body;
 
-    const url = await s3.upload(file!);
+    if (!file) {
+      throw new BadRequestError('image is required');
+    }
+
+    const url = await s3.upload(file);
 
     const image = Image.build({
       userId: req.currentUser.id,
