@@ -10,7 +10,7 @@ export class RequestValidatorError extends CustomError {
     Object.setPrototypeOf(this, RequestValidatorError.prototype);
   }
 
-  SerializeError(): { message: string; field?: string | undefined }[] {
+  serializeErrors(): { message: string; field?: string | undefined }[] {
     return this.errors.map((err) => {
       return {
         message: err.msg,
