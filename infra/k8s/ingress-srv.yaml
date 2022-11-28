@@ -10,6 +10,13 @@ spec:
     - host: tdg.dev
       http:
         paths:
+          - path: /api/products/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: products-srv
+                port:
+                  number: 3000
           - path: /api/images/?(.*)
             pathType: Prefix
             backend:
